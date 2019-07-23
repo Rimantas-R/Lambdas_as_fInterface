@@ -3,6 +3,13 @@ package apps;
 import java.util.function.Consumer;
 
 public class AnonInnerSmth {
+	
+	void wrap(Integer ii) {
+		doProces(ii, i -> {
+			System.out.println("ii iis: " + i);
+			System.out.println(this);
+		});
+	}
 
 	<T> void  doProces(T i, Consumer<T> consumer) {
 		consumer.accept(i);
@@ -37,10 +44,15 @@ public class AnonInnerSmth {
 		
 		smth.doProces(3, System.out::println);
 		
+		smth.wrap(15);
+		
+	}
+	
+	public String toString() {
+		return "I'm instance of  AnonInnerSmth";
 	}
 
 	private static String aboutMe() {
-		// TODO Auto-generated method stub
 		return "I'm static ";
 	}
 }
