@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 public class AnonInnerSmth {
 
-	void doProces(Integer i, Consumer<Integer> consumer) {
+	<T> void  doProces(T i, Consumer<T> consumer) {
 		consumer.accept(i);
 	};
 	
@@ -14,7 +14,7 @@ public class AnonInnerSmth {
 		smth.doProces(2, new Consumer<Integer>() {
 
 			@Override
-			public void accept(Integer i) {
+			public  void accept(Integer i) {
 				System.out.println("i is: " + i);
 				System.out.println(this);
 				System.out.println(aboutMe());
