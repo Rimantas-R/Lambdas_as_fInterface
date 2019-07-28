@@ -5,9 +5,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
 import apps.models.Person;
 
 public class LambdasNCollections {
+
+//	@FunctionalInterface
+//	public interface Criteria {
+//
+//		 String a(Person b);
+//	}
 
 	public static void main(String[] args) {
 
@@ -27,9 +34,21 @@ public class LambdasNCollections {
 
 		System.out.println("----------------------");
 
-		Function<Person, String> parameter = (p) -> p.getName();
+		Function<Person, String> parameter = p -> p.getName();
 		List<Person> newPersons = sortCustom(persons, parameter);
 		newPersons.forEach(System.out::println);
+		System.out.println("----------------------");
+		Function crit = new Function() {
+
+			@Override
+			public String apply(Object p) {
+				return ((Person) p).getSurname();
+			}
+			
+		};
+
+		List<Person> newPersons2 = sortCustom(persons, crit);
+		newPersons2.forEach(System.out::println);
 	}
 
 	/**
@@ -41,4 +60,14 @@ public class LambdasNCollections {
 				.sorted(Comparator.comparing(sortingParam).reversed().thenComparing(p -> p.getSurname()).reversed())
 				.collect(Collectors.toList());
 	}
+	
+	/**
+	 * @param persons
+	 * @return
+	 *//*
+	private static List<Person> sortCustom2(List<Person> persons, Criteria crit) {
+		return persons.stream().distinct()
+				.sorted(Comparator.comparing( (Function<Person, String>) crit).reversed().thenComparing(p -> p.getSurname()).reversed())
+				.collect(Collectors.toList());
+	}*/
 }
